@@ -1,0 +1,25 @@
+name: Listing s3 buckets
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+
+jobs:
+  listing_buckets:
+    runs-on: ubuntu-latest
+    steps:
+      - name: setup aws cred
+        uses: aws-actions/configure-aws-credentials@v5.1.0
+        with:
+          role-to-assume: ${{secrets.IAM_ROLE}}
+          aws_region: ${{secrets.AWS_REGION}}
+
+      - name: list S3 buckets
+        env:
+          AWS_Region: ${{secrets.AWS_REGION}}
+        run: |
+          echo "Listing s3 buckets"
+          aws s3 ls
