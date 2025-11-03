@@ -15,7 +15,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v5.1.0
         with:
           role-to-assume: ${{secrets.IAM_ROLE}}
-          aws_region: ${{secrets.AWS_REGION}}
+          aws-region: ${{secrets.AWS_REGION}}
 
       - name: list S3 buckets
         env:
