@@ -38,9 +38,13 @@ jobs:
         run: terraform apply -auto-approve
         working-directory: terraform
 
-      - name: Uploading files to s3 bucket
-        run: |
-          BUCKET_NAME=$(terraform -chdir=terraform output -raw bucket_name)
-          echo "Uploading files to S3 bucket: $BUCKET_NAME"
-          aws s3 cp index.html s3://$BUCKET_NAME/
+      - name: Terraform Destroy
+        run: terraform destroy -auto-approve
+        working-directory: terraform
+
+      # - name: Uploading files to s3 bucket
+      #   run: |
+      #     BUCKET_NAME=$(terraform -chdir=terraform output -raw bucket_name)
+      #     echo "Uploading files to S3 bucket: $BUCKET_NAME"
+      #     aws s3 cp index.html s3://$BUCKET_NAME/
 
